@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:jms="http://www.springframework.org/schema/jms"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:util="http://www.springframework.org/schema/util"
@@ -21,7 +22,8 @@
 
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/flowerShopDS"/>
     <jee:jndi-lookup id="connectionFactory" jndi-name="jms/connectionFactory"/>
-    <jee:jndi-lookup id="esbToMcpRequestQueue" jndi-name="jms/queue/mainQueue"/>
+    <jee:jndi-lookup id="sendNewUserXmlQueue" jndi-name="jms/outQueue"/>
+    <jee:jndi-lookup id="receiveUserDiscountXmlQueue" jndi-name="jms/inQueue"/>
     <context:annotation-config/>
     <context:component-scan base-package="com.accenture"/>
 
