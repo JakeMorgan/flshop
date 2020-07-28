@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("index");
             }else{
                 LOG.error("Неверный Login or Password");
+                response.sendRedirect("login");
             }
         }
         else if (request.getParameter("regsubmit") != null){

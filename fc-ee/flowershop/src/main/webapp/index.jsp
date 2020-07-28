@@ -12,15 +12,17 @@ import= "com.accenture.be.entity.User"%>
 <h2>FlowerShop</h2>
 <h3>Personal Area</h3>
 <% User user = (User) session.getAttribute("user");%>
+<form action="index" method="post">
 <b><p>Login: <input type="text" name="username" size="40" value= <%=user.getUserName() %>></p></b>
 <b><p>Password: <input type="text" name="password" size="40" value= <%=user.getPassword() %>></p></b>
 <b><p>Address: <input type="text" name="address" size="40" value= <%=user.getAddress() %>></p></b>
 <b><p>Phone: <input type="text" name="phone" size="40" value= <%=user.getPhone() %>></p></b>
 <b><p>Money: <%=user.getBalance() %></p></b>
 <br>
-<button type="submit" name="save" id="save">Save</button>
+<button type="submit" name="save" id="save" method="post">Save</button>
 <br>
 <button type="submit" name="flowers" id="flowers">Flowers</button>
+</form>
 </div>
 </body>
 </html>

@@ -2,8 +2,12 @@ package com.accenture.fe.servlets;
 
 import com.accenture.be.business.UserBusinessService;
 import com.accenture.be.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +18,15 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/index")
 public class IndexServlet extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(IndexServlet.class);
     @Autowired
     private UserBusinessService userBusinessService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException{
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
@@ -25,10 +36,9 @@ public class IndexServlet extends HttpServlet {
             User user = userBusinessService.updateData(un.getUserName(), request.getParameter("username"), request.getParameter("password"), request.getParameter("address"),
                     request.getParameter("phone"));
             session.setAttribute("user", user);
-            response.sendRedirect("login");
         }
         if(request.getParameter("flowers") != null){
-
+            response.sendRedirect("flowers");
         }
 
     }
