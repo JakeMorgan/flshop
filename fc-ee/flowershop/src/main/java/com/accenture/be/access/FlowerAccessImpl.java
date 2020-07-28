@@ -27,8 +27,7 @@ public class FlowerAccessImpl implements FlowerAccessService {
     @Override
     public Flower getById(Long id) {
         try {
-            Flower flower = entityManager.find(Flower.class, id);
-            return flower;
+            return entityManager.find(Flower.class, id);
         } catch (NoResultException ex) {
             return null;
         }

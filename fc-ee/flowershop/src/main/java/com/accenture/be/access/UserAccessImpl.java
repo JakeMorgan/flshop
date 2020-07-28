@@ -21,7 +21,7 @@ public class UserAccessImpl implements UserAccessService {
             query.setParameter("username", userName);
             return Optional.ofNullable(query.getSingleResult());
         }catch(NoResultException ex){
-                return null;
+                return Optional.empty();
             }
     }
 

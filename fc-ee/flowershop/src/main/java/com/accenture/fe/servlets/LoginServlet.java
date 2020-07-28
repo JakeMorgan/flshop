@@ -25,42 +25,41 @@ public class LoginServlet extends HttpServlet {
     UserBusinessService userBusinessService;
 
     @Override
-    public void init(ServletConfig config) throws ServletException{
+    public void init(ServletConfig config) throws ServletException {
         super.init(config);
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-        if(request.getParameter("loginsubmit") != null) {
-            Optional<User> optionalUser =  userBusinessService.login(request.getParameter("username"), request.getParameter("password"));
-            if(optionalUser.isPresent()){
+        if (request.getParameter("loginsubmit") != null) {
+            Optional<User> optionalUser = userBusinessService.login(request.getParameter("username"), request.getParameter("password"));
+            if (optionalUser.isPresent()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", optionalUser.get());
                 response.sendRedirect("index");
-            }else{
+            } else {
                 LOG.error("Неверный Login or Password");
                 response.sendRedirect("login");
             }
-        }
-        else if (request.getParameter("regsubmit") != null){
+        } else if (request.getParameter("regsubmit") != null) {
             Optional<User> optionalUser = userBusinessService.register(request.getParameter("username"), request.getParameter("password"), "", "", new BigDecimal(0));
-            if(optionalUser.isPresent()){
+            if (optionalUser.isPresent()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", optionalUser.get());
                 response.sendRedirect("index");
-            }else{
+            } else {
                 LOG.error("Пользователь уже существует");
             }
         }
     }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws
-            ServletException, IOException{
+            ServletException, IOException {
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
-    private User setUser(User u){
-        User user = u;
-        return user;
+    private User setUser(User u) {
+        return u;
     }
 }

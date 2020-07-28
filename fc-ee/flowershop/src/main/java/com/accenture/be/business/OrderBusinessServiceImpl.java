@@ -25,14 +25,12 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
 
     @Override
     public List<Order> ordersList() {
-        List<Order> orders = orderAccessService.getOrders();
-        return orders;
+        return orderAccessService.getOrders();
     }
 
     @Override
     public List<Order> getUserOrders(User user) {
-        List<Order> orders = orderAccessService.getOrderByUser(user);
-        return orders;
+        return orderAccessService.getOrderByUser(user);
     }
 
     public void completeOrder(Long id){

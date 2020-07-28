@@ -45,8 +45,7 @@ public class OrderAccessImpl implements OrderAccessService {
         try{
             TypedQuery<Order> query = entityManager.createQuery("SELECT o FROM Order o WHERE o.id=:id", Order.class);
             query.setParameter("id", id);
-            Order order = query.getSingleResult();
-            return order;
+            return query.getSingleResult();
         }catch(NoResultException ex){
             return null;
         }

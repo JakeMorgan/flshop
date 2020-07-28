@@ -17,8 +17,7 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
     }
 
     public List<Flower> flowersList(){
-        List<Flower> flowerList = flowerAccessService.getFlowers();
-        return flowerList;
+        return flowerAccessService.getFlowers();
     }
 
     public Flower updateFlowersCount(Long id, int quantity) throws Exception{
